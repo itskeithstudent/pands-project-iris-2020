@@ -4,6 +4,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import prelim_analysis_hist
 import seaborn as sns
+
+#initialise seaborn, this will apply to all future plot's
 sns.set()
 #iris_df is the dataframe storing the full iris dataset
 iris_df = pd.read_csv('iris-flower-dataset\IRIS.csv')
@@ -83,3 +85,7 @@ plt.close()
 
 myMultiHistFig = prelim_analysis_hist.hist_subplot_iris(iris_df) #call funtion from prelim_analysis_hist.py file for generating hist subplot
 myMultiHistFig.savefig('Preliminary Analysis Output\Hist of all flowers.png') #save hist subplot to .png
+
+sns.pairplot(iris_df, hue="species") #this idea was got from seaborn official doc.:https://seaborn.pydata.org/examples/scatterplot_matrix.html
+plt.savefig('Preliminary Analysis Output\Seaborn Pairplot of all species.png') 
+plt.close()
