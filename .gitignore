@@ -41,3 +41,6 @@ vignettes/*.pdf
 # Images
 *.png
 *.txt
+
+# virtual env
+/env

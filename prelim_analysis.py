@@ -3,7 +3,8 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import prelim_analysis_hist
-
+import seaborn as sns
+sns.set()
 #iris_df is the dataframe storing the full iris dataset
 iris_df = pd.read_csv('iris-flower-dataset\IRIS.csv')
 
@@ -44,9 +45,6 @@ for species in uniqueSpecies:
 
 #save plots to Preliminary Analysis Output folder
 
-myMultiHistFig = prelim_analysis_hist.hist_subplot_iris(iris_df) #call funtion from prelim_analysis_hist.py file for generating hist subplot
-myMultiHistFig.savefig('Preliminary Analysis Output\Hist of all flowers.png') #save hist subplot to .png
-
 plt.plot( iris_df['petal_width'], iris_df['petal_length'], 'g.', label="petal_width vs petal_length") #declare the plot and define it's x and y axis
 plt.title("Petal Width vs. Petal Length across all flower species") #title for plot
 plt.xlabel("petal_width") #x axis label
@@ -82,3 +80,6 @@ plt.xlabel("petal_width")
 plt.ylabel("sepal_width") 
 plt.savefig('Preliminary Analysis Output\Petal v Sepal Width.png')
 plt.close()
+
+myMultiHistFig = prelim_analysis_hist.hist_subplot_iris(iris_df) #call funtion from prelim_analysis_hist.py file for generating hist subplot
+myMultiHistFig.savefig('Preliminary Analysis Output\Hist of all flowers.png') #save hist subplot to .png
