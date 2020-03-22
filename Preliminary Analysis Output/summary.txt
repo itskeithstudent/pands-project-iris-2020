@@ -33,4 +33,4 @@ Iris-setosa
 Iris-versicolor
 Iris-virginica
 
- Please find all generated .png's of plots in this same folder
+Please find all generated .png's of plots in this same folder
