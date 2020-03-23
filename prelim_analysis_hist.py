@@ -176,8 +176,9 @@ def hist_subplot_iris(iris_df):
 
     axes[4][3].hist(iris_versicolor_df['sepal_width'], color='green')
     axes[4][3].set_title('Iris-Versicolor sepal width')
-    axes[4][3].legend(['Iris Versicolor'])
+    axes[4][3].legend(['Iris Versicolor']) #weirdly for the legend need's to get argument as list item
     axes[4][3].set_ylabel('No. Petals')
     axes[4][3].set_xlabel('Sepal Width')
     fig.tight_layout() #and now we show the completed subplot
+    #weirdly with the above there is incosistency with placement, so I should probably set top right here for all
     return fig #returns to what called it, so perform saving of subplot in main .py file not here
