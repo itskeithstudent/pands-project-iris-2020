@@ -89,3 +89,11 @@ myMultiHistFig.savefig('Preliminary Analysis Output\Hist of all flowers.png') #s
 sns.pairplot(iris_df, hue="species") #this idea was got from seaborn official doc.:https://seaborn.pydata.org/examples/scatterplot_matrix.html
 plt.savefig('Preliminary Analysis Output\Seaborn Pairplot of all species.png') 
 plt.close()
+
+fig, axes = plt.subplots(ncols=2, nrows=2, figsize=(15, 15))
+sns.violinplot(x='species', y='petal_length', hue='species', data=iris_df, ax=axes[0][0])
+sns.violinplot(x='species', y='petal_width', hue='species', data=iris_df, ax=axes[0][1])
+sns.violinplot(x='species', y='sepal_length', hue='species', data=iris_df, ax=axes[1][0])
+sns.violinplot(x='species', y='sepal_width', hue='species', data=iris_df, ax=axes[1][1])
+plt.savefig('Preliminary Analysis Output\Violin Plots of Species Parameters.png') 
+plt.close()
