@@ -3,12 +3,17 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import prelim_analysis_hist
+import prelim_analysis_fig_names
 import seaborn as sns
 
 #initialise seaborn, this will apply to all future plot's
 sns.set()
 #iris_df is the dataframe storing the full iris dataset
 iris_df = pd.read_csv('iris-flower-dataset\IRIS.csv')
+#create dataframes by species for filtering convenience
+iris_setosa_df = iris_df[iris_df['species']=='Iris-setosa']
+iris_versicolor_df = iris_df[iris_df['species']=='Iris-versicolor']
+iris_virginica_df = iris_df[iris_df['species']=='Iris-virginica']
 
 #after doing a bit of digging we can use .to_string on the describe pandas function to give us a str representation of our dataframe object
 iris_df_description = iris_df.describe().to_string() #took inspiration from stackOverflow: https://stackoverflow.com/questions/51829923/write-a-pandas-dataframe-to-a-txt-file
@@ -26,6 +31,10 @@ with open('Preliminary Analysis Output\summary.txt', 'w') as summaryFile:
     uniqueSpecies = iris_df['species'].unique() #store all the unique species in a list
     for species in uniqueSpecies:
         summaryFile.write(f"{species}\n") #write each item of list to text file on new line
+
+    summaryFile.write(f"Correlation of each of the parameters versus one another:\n")
+    summaryFile.write(f"{iris_df.corr().to_string()}\n")
+
     summaryFile.write("\nPlease find all generated .png's of plots in this same folder")
 
 #leaving in old print statements for now, so still getting messages in console
@@ -44,6 +53,8 @@ uniqueSpecies = iris_df['species'].unique()
 print("\nThe individual Iris flower Species are:")
 for species in uniqueSpecies:
     print(species)
+
+
 
 #save plots to Preliminary Analysis Output folder
 
@@ -84,16 +95,59 @@ plt.savefig('Preliminary Analysis Output\Petal v Sepal Width.png')
 plt.close()
 
 myMultiHistFig = prelim_analysis_hist.hist_subplot_iris(iris_df) #call funtion from prelim_analysis_hist.py file for generating hist subplot
-myMultiHistFig.savefig('Preliminary Analysis Output\Hist of all flowers.png') #save hist subplot to .png
+myMultiHistFig.savefig(prelim_analysis_fig_names.histPngName) #save hist subplot to .png
 
-sns.pairplot(iris_df, hue="species") #this idea was got from seaborn official doc.:https://seaborn.pydata.org/examples/scatterplot_matrix.html
-plt.savefig('Preliminary Analysis Output\Seaborn Pairplot of all species.png') 
+#Start seaborn plot's
+myPairPlot = sns.pairplot(iris_df, hue="species")#this idea was got from seaborn official doc.:https://seaborn.pydata.org/examples/scatterplot_matrix.html
+myPairPlot.fig.suptitle("Pair Plot of entire iris dataset coloured by species",y = 1, x=0.45)
+plt.savefig('Preliminary Analysis Output\Seaborn Pairplot of all species.png')
 plt.close()
 
-fig, axes = plt.subplots(ncols=2, nrows=2, figsize=(15, 15))
+gridsize = (2, 3)
+fig = plt.figure(figsize=(12, 8))
+ax1 = plt.subplot2grid(gridsize, (0, 0), colspan=3, rowspan=1)
+ax1.set_title("All Iris Species Distribution Plots")
+ax2 = plt.subplot2grid(gridsize, (1, 0))
+ax2.set_title("Iris Setosa")
+ax3 = plt.subplot2grid(gridsize, (1, 1))
+ax3.set_title("Iris Versicolor")
+ax4 = plt.subplot2grid(gridsize, (1, 2))
+ax4.set_title("Iris Virginica")
+sns.distplot(iris_df['petal_length'], ax=ax1, bins=5)
+sns.distplot(iris_setosa_df['petal_length'], ax=ax2, bins=10, color='red')
+sns.distplot(iris_versicolor_df['petal_length'], ax=ax3, bins=10, color='green')
+sns.distplot(iris_virginica_df['petal_length'], ax=ax4, bins=10, color='blue')
+plt.subplots_adjust(hspace=.4)
+plt.savefig(prelim_analysis_fig_names.petalLengthDistPngName)
+plt.close()
+
+gridsize = (2, 3)
+fig = plt.figure(figsize=(12, 8))
+ax1 = plt.subplot2grid(gridsize, (0, 0), colspan=3, rowspan=1)
+ax1.set_title("All Iris Species Distribution Plots")
+ax2 = plt.subplot2grid(gridsize, (1, 0))
+ax2.set_title("Iris Setosa")
+ax3 = plt.subplot2grid(gridsize, (1, 1))
+ax3.set_title("Iris Versicolor")
+ax4 = plt.subplot2grid(gridsize, (1, 2))
+ax4.set_title("Iris Virginica")
+sns.distplot(iris_df['petal_width'], ax=ax1, bins=10)
+sns.distplot(iris_setosa_df['petal_width'], ax=ax2, bins=10, color='red')
+sns.distplot(iris_versicolor_df['petal_width'], ax=ax3, bins=10, color='green')
+sns.distplot(iris_virginica_df['petal_width'], ax=ax4, bins=10, color='blue')
+plt.subplots_adjust(hspace=.4)
+plt.savefig(prelim_analysis_fig_names.petalWidthDistPngName)
+plt.close()
+
+fig, axes = plt.subplots(ncols=2, nrows=2, figsize=(12, 8))
 sns.violinplot(x='species', y='petal_length', hue='species', data=iris_df, ax=axes[0][0])
 sns.violinplot(x='species', y='petal_width', hue='species', data=iris_df, ax=axes[0][1])
 sns.violinplot(x='species', y='sepal_length', hue='species', data=iris_df, ax=axes[1][0])
 sns.violinplot(x='species', y='sepal_width', hue='species', data=iris_df, ax=axes[1][1])
-plt.savefig('Preliminary Analysis Output\Violin Plots of Species Parameters.png') 
+plt.savefig(prelim_analysis_fig_names.allParamsViolinPlotPngName)
+plt.close()
+
+plt.figure(figsize=(12,8))
+sns.heatmap(iris_df.corr(),annot=True)
+plt.savefig('Preliminary Analysis Output/heatmap.png')
 plt.close()
