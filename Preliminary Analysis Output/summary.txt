@@ -1,4 +1,4 @@
-This is a summary of all the numeric columns of the Iris Flower Dataset:
+This is a summary of all the numeric columns of the Iris Flower Dataset, from this we can infer the range of values we will be working with and the amount of variation:
 
        sepal_length  sepal_width  petal_length  petal_width
 count    150.000000   150.000000    150.000000   150.000000
@@ -19,7 +19,7 @@ This is the top 5 rows of the dataset, this shows us one of the flower species a
 3           4.6          3.1           1.5          0.2  Iris-setosa
 4           5.0          3.6           1.4          0.2  Iris-setosa 
 
-This is the tail: 
+This is the tail, showing similar to the head but the opposite end of the datagrame: 
      sepal_length  sepal_width  petal_length  petal_width         species
 145           6.7          3.0           5.2          2.3  Iris-virginica
 146           6.3          2.5           5.0          1.9  Iris-virginica
@@ -29,9 +29,11 @@ This is the tail:
 
 The total number of rows is 150
 
+The different species of flower in the dataset are:
 Iris-setosa
 Iris-versicolor
 Iris-virginica
+
 Correlation of each of the parameters versus one another:
               sepal_length  sepal_width  petal_length  petal_width
 sepal_length      1.000000    -0.109369      0.871754     0.817954
