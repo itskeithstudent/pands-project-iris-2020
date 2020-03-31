@@ -33,11 +33,12 @@ with open('Preliminary Analysis Output\summary.txt', 'w') as summaryFile:
     for species in uniqueSpecies:
         summaryFile.write(f"{species}\n") #write each item of list to text file on new line
 
+    summaryFile.write(f"\nDistribution of these species is:\n{iris_df.groupby('species').size().to_string()}\n") #Species distribution
     summaryFile.write(f"\nCorrelation of each of the parameters versus one another:\n")
     summaryFile.write(f"{iris_df.corr().to_string()}\n")
 
     summaryFile.write("\nPlease find all generated .png's of plots in this same folder")
-    summaryFile.write("\nSome Observations:\n")
+    summaryFile.write("\n\nSome Observations:")
     summaryFile.write("\nFrom the 'Correlation Heatmap.png' we can see the correlation of our different parameters, \
     which shows that there is likely a strong relationship between petal_length and petal_width, also for sepal_length \
     and petal_length (though not as strongly correlated) and finally for petal_width and sepal_width, this also tells \
