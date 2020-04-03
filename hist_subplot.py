@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 def hist_subplot_iris(iris_df):
+    print("Histograms Being Generated...")
     #get passed iris_df as argument from prelim_analysis.py and split it here
     iris_setosa_df = iris_df[iris_df['species']=='Iris-setosa']
     iris_versicolor_df = iris_df[iris_df['species']=='Iris-versicolor']
