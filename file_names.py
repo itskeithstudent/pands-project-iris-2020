@@ -13,3 +13,7 @@ sepalWidthVLengthPngName = f"{folderLocation}Sepal Width v Length.png"
 
 corrHeatmapPngName = f"{folderLocation}Correlation Heatmap.png"
 seabornPairplotPngName = f"{folderLocation}Seaborn Pairplot of All Species.png"
+
+#model image names
+modelOutputFolderLocation = 'Decision Tree Analysis Output/'
+optimalNodesDTCPngName = f"{modelOutputFolderLocation}DecisionTreeClassifierOptimalNodes.png"
