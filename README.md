@@ -18,8 +18,9 @@ This project consists of three parts:
 * iris_modelling.py - Python file where once called generates a Decision Tree Classifier model on the iris dataset.
 
 ### Technologies Used
-  [Python] (https://www.python.org/)
-  [Jupyter Notebook] (https://jupyter.org/)
+  [Python](https://www.python.org/)
+ 
+  [Jupyter Notebook](https://jupyter.org/)
 
 
 ## How to run the analysis
