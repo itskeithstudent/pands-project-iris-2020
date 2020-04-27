@@ -10,7 +10,6 @@ petalVSepalWidthPngName = f"{folderLocation}Petal v Sepal Width.png"
 petalVSepalLengthPngName = f"{folderLocation}Petal v Sepal Length.png"
 petalWidthVLengthPngName = f"{folderLocation}Petal Width v Length.png"
 sepalWidthVLengthPngName = f"{folderLocation}Sepal Width v Length.png"
-
 corrHeatmapPngName = f"{folderLocation}Correlation Heatmap.png"
 seabornPairplotPngName = f"{folderLocation}Seaborn Pairplot of All Species.png"
 

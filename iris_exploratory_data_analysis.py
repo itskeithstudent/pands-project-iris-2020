@@ -6,7 +6,8 @@ import hist_subplot #adjacent .py file, histogram subplot's took up many lines s
 import file_names #adjacent .py file containing variables holding string val's for different filenames
 import seaborn as sns #using seaborn to create nicer visuals
 
-def Write_Eda_Summary(iris_df):
+# write_Eda_Summary function writes a summary of the exploratory data analysis steps performed
+def write_Eda_Summary(iris_df):
     print("Exploratory Data Analysis Summary Being Written...")
     #open summary.txt file or create if doesn't exist and write to it
     with open('Preliminary Analysis Output\summary.txt', 'w') as summaryFile:
@@ -38,8 +39,8 @@ def Write_Eda_Summary(iris_df):
         summaryFile.write("\nThis is further supported when looking at the 'Petal Width v Length.png', \
         'Petal v Sepal Length.png' and 'Petal v Sepal Width.png', which all show a strong linear relationship but also hint at there being groupings or clusters of data, most likely based on species")
 
-
-def pyplot_plots(iris_df):
+# pyplot_Plots function generates a series of plots using the pyplot library
+def pyplot_Plots(iris_df):
     print("Exploratory Data Analysis Pyplots Being Generated...")
     #save plots to Preliminary Analysis Output folder
     plt.plot( iris_df['petal_width'], iris_df['petal_length'], 'g.', label="petal_width vs petal_length") #declare the plot and define it's x and y axis
@@ -78,7 +79,8 @@ def pyplot_plots(iris_df):
     plt.savefig(file_names.petalVSepalWidthPngName)
     plt.close()
 
-def seaborn_plots(iris_df, iris_setosa_df, iris_versicolor_df, iris_virginica_df):
+# seaborn_Plots function generates a series of plots using the seaborn library
+def seaborn_Plots(iris_df, iris_setosa_df, iris_versicolor_df, iris_virginica_df):
     print("Fancy Seaborn Plots Being Hand-crafted...")
     #Start seaborn plot's
     myPairPlot = sns.pairplot(iris_df, hue="species")#this idea was got from seaborn official doc.:https://seaborn.pydata.org/examples/scatterplot_matrix.html
@@ -88,6 +90,7 @@ def seaborn_plots(iris_df, iris_setosa_df, iris_versicolor_df, iris_virginica_df
 
     #Distribution plot's basically a fancier version of hist from matplotlib
     #for this plot I want one large one on top of all species together, then 3 beneath coloured by species
+    #2x3 histogram distribution plots of all species and each species individually by petal_length
     gridsize = (2, 3)
     fig = plt.figure(figsize=(12, 8))
     ax1 = plt.subplot2grid(gridsize, (0, 0), colspan=3, rowspan=1)
@@ -107,6 +110,7 @@ def seaborn_plots(iris_df, iris_setosa_df, iris_versicolor_df, iris_virginica_df
     plt.savefig(file_names.petalLengthDistPngName)
     plt.close()
 
+    #2x3 histogram distribution plots of all species and each species individually by petal_width
     gridsize = (2, 3)
     fig = plt.figure(figsize=(12, 8))
     ax1 = plt.subplot2grid(gridsize, (0, 0), colspan=3, rowspan=1)
@@ -126,6 +130,7 @@ def seaborn_plots(iris_df, iris_setosa_df, iris_versicolor_df, iris_virginica_df
     plt.savefig(file_names.petalWidthDistPngName)
     plt.close()
 
+    #2x2 violin plot's showing distribution of each species by each of the columns
     fig, axes = plt.subplots(ncols=2, nrows=2, figsize=(14, 10))
     sns.violinplot(x='species', y='petal_length', hue='species', data=iris_df, ax=axes[0][0])
     sns.violinplot(x='species', y='petal_width', hue='species', data=iris_df, ax=axes[0][1])
@@ -136,9 +141,7 @@ def seaborn_plots(iris_df, iris_setosa_df, iris_versicolor_df, iris_virginica_df
     plt.savefig(file_names.allParamsViolinPlotPngName)
     plt.close()
 
-    '''plt.figure(figsize=(12,8))
-    sns.heatmap(iris_df.corr(),annot=True)
-    plt.title("Correlation Heatmap")'''
+    #2x2 correlation heatmap, showing correlation of each coloumn for all species and each species independently
     fig, axes = plt.subplots(ncols=2, nrows=2, figsize=(10, 10))
     sns.heatmap(iris_df.corr(), annot=True, ax=axes[0][0])
     axes[0][0].set_title("All Species")
@@ -158,12 +161,16 @@ sns.set()
 #iris_df is the dataframe storing the full iris dataset
 iris_df = pd.read_csv('iris-flower-dataset\IRIS.csv')
 #create dataframes by species for filtering convenience
-iris_setosa_df = iris_df[iris_df['species']=='Iris-setosa']
-iris_versicolor_df = iris_df[iris_df['species']=='Iris-versicolor']
-iris_virginica_df = iris_df[iris_df['species']=='Iris-virginica']
+iris_setosa_df = iris_df[iris_df['species']=='Iris-setosa'] #iris-setosa dataframe
+iris_versicolor_df = iris_df[iris_df['species']=='Iris-versicolor'] #iris-versicolor dataframe
+iris_virginica_df = iris_df[iris_df['species']=='Iris-virginica'] #iris-virginca dataframe
 
-Write_Eda_Summary(iris_df)
-pyplot_plots(iris_df)
-myMultiHistFig = hist_subplot.hist_subplot_iris(iris_df) #call funtion from hist_subplot.py file for generating hist subplot
+#call function to write summary text
+write_Eda_Summary(iris_df)
+#call function to generate pyplot plots
+pyplot_Plots(iris_df)
+#call funtion from hist_subplot.py file for generating hist subplot
+myMultiHistFig = hist_subplot.hist_subplot_iris(iris_df)
 myMultiHistFig.savefig(file_names.histPngName) #save hist subplot to .png
-seaborn_plots(iris_df,iris_setosa_df,iris_versicolor_df,iris_virginica_df)
+#call function to generate seaborn plots, basically same as pyplot plots but prettier
+seaborn_Plots(iris_df,iris_setosa_df,iris_versicolor_df,iris_virginica_df)
