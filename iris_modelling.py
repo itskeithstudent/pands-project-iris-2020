@@ -93,3 +93,49 @@ writeToSummary(file_folder_name, species_names, feature_names, val_predictions, 
 
 # generate a plot for the model so far
 generateModelPlot(model=iris_model, features=feature_names, responses=species_names, save_to_file=file_names.optimalNodesDTCPngName)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Features, these are my columns of interest that I think will factor into determining flower species
+#This time, I'm picking the two features that didn't end up in the final model, to compare how accurate these are to the model that had every column available to it
+feature_names = ['sepal_width', 'sepal_length']
+
+#X is a dataframe of just the columns from feature_names
+X = iris_df[feature_names]
+
+# Supplying a numeric value to the random_state argument guarantees we get the same split every time this script is ran.
+train_X, val_X, train_y, val_y = train_test_split(X, y, random_state=0)
+
+# leaf_nodes is set to 5, from testing in Jupyter Notebook
+# 4 was the optimal number of leaf nodes as it gave the most accurate result at the lowest number of leaf nodes
+leaf_nodes = 5
+# iris_model gets returned a DecisionTreeModel object
+bad_iris_model = generateModel(leaf_nodes, train_X, train_y)
+# get what our model predicts what y should be when we pass in val_X the validation feature data
+val_predictions = bad_iris_model.predict(val_X)
+print(val_predictions)
+print(val_y)
+# get the score for our model e.g. how accurate it is
+model_score = bad_iris_model.score(val_X, val_y)
+print(model_score)
+
+# generate a plot for the model so far
+generateModelPlot(model=bad_iris_model, features=feature_names, responses=species_names, save_to_file="Decision Tree Analysis Output\LessAccurateDecisionTreeClassifiertest.png")
