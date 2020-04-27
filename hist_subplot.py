@@ -2,6 +2,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
+# hist_subplot_iris function returns a fig object that can be shown/saved (fig.show(), fig.save()) or further altered
 def hist_subplot_iris(iris_df):
     print("Histograms Being Generated...")
     #get passed iris_df as argument from prelim_analysis.py and split it here

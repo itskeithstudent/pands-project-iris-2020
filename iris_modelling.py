@@ -5,7 +5,11 @@ from sklearn.model_selection import train_test_split #to split data in train and
 from matplotlib import pyplot as plt
 import file_names
 
-
+# generateModel function returns a DecisionTreeClassifier object
+# takes arguments for:
+#   maximum number of leaf nodes used by model
+#   X/feature data, what data determines our response
+#   y/response data, the data for our responses
 def generateModel(leaf_nodes, feature_data, response_data):
 
     #define iris_model object from DecisionTreeClassifier, using random_state=0 as it makes the result consistent
@@ -17,7 +21,7 @@ def generateModel(leaf_nodes, feature_data, response_data):
     #return the model
     return model
 
-#function to write summary data to a text file
+# writeToSummary function to write summary data of DecisionTreeClassifier model to a text file
 def writeToSummary(write_to_file, responses, features, predicted_values, validation_values, score):
     #with will close if encounter's any errors
     with open(write_to_file, 'w') as summaryFile:
@@ -40,6 +44,7 @@ def writeToSummary(write_to_file, responses, features, predicted_values, validat
         summaryFile.write("The model score looks pretty good\nWhat this tells us is that across the validation data we are off for one flower, which is a pretty good guess for our purposes as it was wrong only in one case.")
         summaryFile.write("This is a spoiler for Decision Tree image, the model only uses two of the four provided features to get this score: Petal_Length and Petal_Width")
 
+# generateModelPlot function to generate a plot of a DecisionTreeClassifier Model
 def generateModelPlot(model, features, responses, save_to_file):
     #create a plot for the decision tree
     fig, axes = plt.subplots(nrows = 1,ncols = 1,figsize = (5,5), dpi=125)
@@ -53,7 +58,8 @@ def generateModelPlot(model, features, responses, save_to_file):
 
 #iris_df is the dataframe storing the full iris dataset
 iris_df = pd.read_csv('iris-flower-dataset\IRIS.csv')
-#y is the iris species and is my class i.e. what I want to predict
+
+#y is the iris species and is my response i.e. what I want to predict
 y = iris_df['species']
 species_names = y.unique()
 
@@ -66,19 +72,24 @@ X = iris_df[feature_names]
 # Supplying a numeric value to the random_state argument guarantees we get the same split every time this script is ran.
 train_X, val_X, train_y, val_y = train_test_split(X, y, random_state=0)
 
+# leaf_nodes is set to 4, from testing in Jupyter Notebook
+# 4 was the optimal number of leaf nodes as it gave the most accurate result at the lowest number of leaf nodes
 leaf_nodes = 4
 
+# iris_model gets returned a DecisionTreeModel object
 iris_model = generateModel(leaf_nodes, train_X, train_y)
 
-#get what our model predicts what y should be when we pass in val_X the validation feature data
+# get what our model predicts what y should be when we pass in val_X the validation feature data
 val_predictions = iris_model.predict(val_X)
 
-#get the score for our model e.g. how accurate it is
+# get the score for our model e.g. how accurate it is
 model_score = iris_model.score(val_X, val_y)
 
-
+# folder and file name to save summary to
 file_folder_name = 'Decision Tree Analysis Output\summary.txt'
 
+# write text summary
 writeToSummary(file_folder_name, species_names, feature_names, val_predictions, val_y, model_score)
 
+# generate a plot for the model so far
 generateModelPlot(model=iris_model, features=feature_names, responses=species_names, save_to_file=file_names.optimalNodesDTCPngName)
