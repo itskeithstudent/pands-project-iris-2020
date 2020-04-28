@@ -109,9 +109,13 @@ As a next step to this (though probably will fall outside the scope of this proj
 For retrieving the Iris Dataset I used a csv which you can find as part of this repository - original csv was found here: https://www.kaggle.com/arshid/iris-flower-dataset/data 
 
 For Exploratory Data Analysis tips in pandas - https://towardsdatascience.com/python-for-data-science-basics-of-pandas-5f8d9680617e
+
 For plotting with Python - https://realpython.com/python-matplotlib-guide/
+
 For getting started with some basic modeling/machine learning - https://www.kaggle.com/learn/intro-to-machine-learning
+
 Next step after Decision Tree Classifier's - https://towardsdatascience.com/why-random-forests-outperform-decision-trees-1b0f175a0b5
+
 K Means Clustering - https://towardsdatascience.com/k-means-clustering-algorithm-applications-evaluation-methods-and-drawbacks-aa03e644b48a
 
 Pandas Documentation - https://pandas.pydata.org/docs/reference/index.html#api
