@@ -47,34 +47,76 @@ This python file also outputs the structure for the decision tree as an image an
 # Summary of the analysis
 From a high level, this analysis can be broken up into a few steps -
 * Exploring the data and making observations
-* Observing relationships in the data and making 
-* Modeling the data to see what can be predicted
+* Observing relationships in the data and making hypothesis (e.g. there is a clear distinction in petal size by species)
+* Modeling the data to see can we correctly predict the species of flower when given it's characteristics.
 
-First exploring the data, the data was read in initially and it's structure was totally unknown so we need determine the types of data and what it looks like. To do so I use pandas inbuilt functions like head, tail, info, nunique as well as simply printing the dataframe, which tells us our dataframe has:
+First exploring the data, the data was read in initially and it's structure was totally unknown so I needed to determine the types of data and what it looks like. To do so I use pandas inbuilt functions like head, tail, info, nunique as well as simply printing the dataframe, which tells us our dataframe has:
 * 5 Columns.
 * Names of each of our columns.
 * 150 rows.
 * All columns are numeric except for species.
 * Species column has three distinct values in it; Setosa, Virginica and Versicolor.
 
-Then using that information I start to plot the data, this starts to show the relationships between the columns and across the different species.
+Then using that information I start to plot the data as I now know the columns that are in the dataset and their types. At this point I am just plotting using simple scatterplots, these plots start to show the relationships between the columns and across the different species.
 * A clear linear relationship is there between petal_length and petal_width.
 * A weaker linear relationship between the petal_length and sepal_length.
+* It looks like there is some distinct groups/clusters when trending petal_length and petal_width.
 
-By splitting up the data by species and summarising it with pandas describe and var functions, we get to see how the different species differ from one another in their sizes and also how much variation there is between their length's and width's.
+Observing the data in more detail and making hypothesis, at this point I decided to split the data by species and observe each of these independently and compare them against one another by adding colour to the scatter plots (seaborn pairplot was really useful for this).
+Plotting the data like this tells much more than the plain plots I initially did, primarily it shows the distinctinos between different species of the flower.
 
-Plotting these on histogram's, box-plots and violin plots then shows the distribution of the data by different species, which in general looks fairly normalised (perhaps if we had more of a sample population we would have a more normalised looking distribution for each). This also shows us clearly how some of the Setosa species is clearly separated from the other two by it's petal_length and petal_width.
+By splitting up the data by species and summarising it with pandas describe and var functions, start to see how the different species differ from one another in their sizes and also how much variation there is between their length's and width's.
+
+Plotting using histogram's, box-plots and violin plots then shows the distribution of the data by different species, which in general looks fairly normalised (perhaps if we had more of a sample population we would have a more normalised looking distribution for each). This also shows us how some of the Setosa species is clearly separated from the other two by petal_length and petal_width.
 
 Using correlation values and heatmaps we can see that there is a clear strong correlation between petal_width and petal_length and also a correlation between petal_length and sepal_length and lastly petal_width and sepal_length. The petal_width and petal_length correlation was what we earlier observed in the scatter plots. 
 
+So by this point we know quite a bit about our data:
+* There are clear distinctions between Iris-Setosa and the other species.
+* Iris-Versicolor and Iris-Virginica are somewhat mixed but still it is generally possible to distinguish between the two.
+* We know the distributions for each of the columns across all species and for each species individually, which shows how much variation each have and where they overlap with one another.
+* We know how each of the columns correlates with one another and in particular we see a very strong correlation between petal_width and petal_length, which hints at these two being strongly related to one another.
+* When we combine the information from our correlation heatmap and our scatter plot's it tells us that as our Petal's get longer, so too can we expect them to be wider (which logically makes sense). We also know that our Sepal length will tend to get longer with our petal but this is not as strong as petal length and petal width.
+* Based on the above points I think that when it comes to predicting our species using information like the petal length, width, sepal width and length that the petal length and width will be more important for predicting the correct species - my reason for thinking so is that petal_length and petal_width are more reliable and predictable e.g. as my petal's get longer they get wider therefore these are more reliable measures to predict with.
 
+Modeling the data, for this I used Sklearns DecisionTreeClassifier (originally I used DecisionTreeRegressor in error), playing around with this in jupyter notebook was pretty straightforward and there is relatively few lines of code you need to write to get a working model. Simply fit your data to the model and you have a model - though not necessarily a reliable one.
+
+In order to get the model up and running though you do need to split your data first into a feature set (reffered to as features or X in the scripts) and a response set (reffered to as response or y in the scripts), the idea here is that you are supplying these to your model and saying that the feature set should allow me to predict my response set.
+
+Generating the model straight away like this does present a problem however, as at this point I was using the whole dataset my model was able to predict with 100% accuracy the correct species but this was only with the supplied data and building a model like this causes overfitting.
+
+So to get a good estimate for the model I needed to split the data into a training set and a validation set (the training set is used to train the model and validation set is then used to determine how good the model is), this was done using another sklearn function train_test_split, this handy function takes the input data (Iris dataset) and spits back out our training and validation data sets for our features and responses.
+
+Using the training set to then build the model and the validation set to determine it's accuracy, I was able to get an accuracy of 97% which is pretty good, but the model is still overfitting due to having excessive leaf nodes that don't give improved accuracy.
+
+So to address that issue I tried out a bunch of different maximum number of leaf nodes using a simple function that built the same model just with different limits on the maximum number of leaf nodes to use, which ended up being 4.
+
+Finally to visualize this model I used sklearn's plot_tree function along with matplotlib's pyplot to generate and save a visual representation of the model.
+
+Observations on the modelling:
+* Interestingly, my earlier assumption around petal_length and petal_width was correct, they are the only two features used in the fitted model.
+* For fun I then only used the excluded features in fitting another DecisionTreeClassifier model, in this case the optimal number of leaf nodes was 5 and the accuracy was 63%.
+
+As a next step to this (though probably will fall outside the scope of this project) I would like to try out a few other models to see if I could improve the accuracy further.
+* Random Forest Classifier - this is the logical next step, takes the idea of a decision tree classifier, randomizes it and generates a whole bunch of models which it then compares the accuracy of against one another and takes the best parts of each.
+* K-Means Clustering - from what I've read this seems like it would be a really useful way of identifying the different species as it is based around identifying clusters of data which is exactly what we have in the iris dataset.
+
+````
+- Sincerely thank you for taking the time to read my summary, please leave feedback as I am still very much a novice and may have made many errors in the write up of my analysis!
+````
 
 ## Resources and References Used
 For retrieving the Iris Dataset I used a csv which you can find as part of this repository - original csv was found here: https://www.kaggle.com/arshid/iris-flower-dataset/data 
 
 For Exploratory Data Analysis tips in pandas - https://towardsdatascience.com/python-for-data-science-basics-of-pandas-5f8d9680617e
+
 For plotting with Python - https://realpython.com/python-matplotlib-guide/
+
 For getting started with some basic modeling/machine learning - https://www.kaggle.com/learn/intro-to-machine-learning
+
+Next step after Decision Tree Classifier's - https://towardsdatascience.com/why-random-forests-outperform-decision-trees-1b0f175a0b5
+
+K Means Clustering - https://towardsdatascience.com/k-means-clustering-algorithm-applications-evaluation-methods-and-drawbacks-aa03e644b48a
 
 Pandas Documentation - https://pandas.pydata.org/docs/reference/index.html#api
 Sklearn Documentation - https://scikit-learn.org/stable/modules/classes.html
