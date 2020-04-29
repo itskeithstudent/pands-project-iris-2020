@@ -16,7 +16,11 @@ This project consists of three parts:
 * hist_subplot.py - Python file containing function for generating a histogram subplot.
 * iris_exploratory_data_analysis.py - Python file where once called perfroms an exploratory data anlysis on the iris dataset.
 * iris_modelling.py - Python file where once called generates a Decision Tree Classifier model on the iris dataset.
+* Requirements.txt - This contains all the required python packages to run the analysis python files. (To use this file to install packages in your terminal run "pip install -r Requirements.txt"
 
+````
+Please note that the analysis output folders will get created on running the python scripts, they are not present in this repository.
+````
 ### Technologies Used
   [Python](https://www.python.org/)
  
