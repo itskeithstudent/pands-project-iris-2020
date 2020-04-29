@@ -5,6 +5,17 @@ import matplotlib.pyplot as plt
 import hist_subplot #adjacent .py file, histogram subplot's took up many lines so separating it out to this file
 import file_names #adjacent .py file containing variables holding string val's for different filenames
 import seaborn as sns #using seaborn to create nicer visuals
+import os #using os to check existence of folder, if not add it
+
+
+#I wanted to remove contents of analysis folders to allow github to only have source code and not include .png and .txt files
+#unfortunately github does not allow empty folders to be included as part of the repository, so I've included this snippet at the top
+#to create the required folder structure if it doesn't exist.
+# name of output folder
+analysis_output_directory = 'Preliminary Analysis Output'
+# if folder does not exist create it using os.mkdir()
+if os.path.exists(analysis_output_directory) != True:
+    os.mkdir(analysis_output_directory)
 
 #Please note: This analysis contains some print statements to indicate progress as it is somewhat slower than the modelling.
 

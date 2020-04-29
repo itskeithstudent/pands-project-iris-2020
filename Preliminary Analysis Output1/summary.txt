@@ -1,0 +1,54 @@
+This is a summary of all the numeric columns of the Iris Flower Dataset, from this we can infer the range of values we will be working with and the amount of variation:
+
+       sepal_length  sepal_width  petal_length  petal_width
+count    150.000000   150.000000    150.000000   150.000000
+mean       5.843333     3.054000      3.758667     1.198667
+std        0.828066     0.433594      1.764420     0.763161
+min        4.300000     2.000000      1.000000     0.100000
+25%        5.100000     2.800000      1.600000     0.300000
+50%        5.800000     3.000000      4.350000     1.300000
+75%        6.400000     3.300000      5.100000     1.800000
+max        7.900000     4.400000      6.900000     2.500000 
+
+This is the top 5 rows of the dataset, this shows us one of the flower species and all of the column names:
+
+   sepal_length  sepal_width  petal_length  petal_width      species
+0           5.1          3.5           1.4          0.2  Iris-setosa
+1           4.9          3.0           1.4          0.2  Iris-setosa
+2           4.7          3.2           1.3          0.2  Iris-setosa
+3           4.6          3.1           1.5          0.2  Iris-setosa
+4           5.0          3.6           1.4          0.2  Iris-setosa 
+
+This is the tail, showing similar to the head but the opposite end of the datagrame: 
+     sepal_length  sepal_width  petal_length  petal_width         species
+145           6.7          3.0           5.2          2.3  Iris-virginica
+146           6.3          2.5           5.0          1.9  Iris-virginica
+147           6.5          3.0           5.2          2.0  Iris-virginica
+148           6.2          3.4           5.4          2.3  Iris-virginica
+149           5.9          3.0           5.1          1.8  Iris-virginica 
+
+The total number of rows is 150
+
+The different species of flower in the dataset are:
+Iris-setosa
+Iris-versicolor
+Iris-virginica
+
+Distribution of these species is:
+species
+Iris-setosa        50
+Iris-versicolor    50
+Iris-virginica     50
+
+Correlation of each of the parameters versus one another:
+              sepal_length  sepal_width  petal_length  petal_width
+sepal_length      1.000000    -0.109369      0.871754     0.817954
+sepal_width      -0.109369     1.000000     -0.420516    -0.356544
+petal_length      0.871754    -0.420516      1.000000     0.962757
+petal_width       0.817954    -0.356544      0.962757     1.000000
+
+Please find all generated .png's of plots in this same folder
+
+Some Observations:
+From the 'Correlation Heatmap.png' we can see the correlation of our different parameters, which shows that there is likely a strong relationship between petal_length and petal_width, also for sepal_length and petal_length (though not as strongly correlated) and finally for petal_width and sepal_width, this also tells us that the remaining parameters do not have an impact on one another
+This is further supported when looking at the 'Petal Width v Length.png', 'Petal v Sepal Length.png' and 'Petal v Sepal Width.png', which all show a strong linear relationship but also hint at there being groupings or clusters of data, most likely based on species

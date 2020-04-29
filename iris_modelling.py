@@ -3,6 +3,16 @@ from sklearn.tree import DecisionTreeClassifier, plot_tree #specify the model
 from sklearn.model_selection import train_test_split #to split data in train and validate
 from matplotlib import pyplot as plt
 import file_names
+import os #using os to check existence of folder, if not add it
+
+#I wanted to remove contents of analysis folders to allow github to only have source code and not include .png and .txt files
+#unfortunately github does not allow empty folders to be included as part of the repository, so I've included this snippet at the top
+#to create the required folder structure if it doesn't exist.
+# name of output folder
+analysis_output_directory = 'Decision Tree Analysis Output'
+# if folder does not exist create it using os.mkdir()
+if os.path.exists(analysis_output_directory) != True:
+    os.mkdir(analysis_output_directory)
 
 # generateModel function returns a DecisionTreeClassifier object
 # takes arguments for:

@@ -44,6 +44,6 @@ vignettes/*.pdf
 # virtual env
 /env
 
-/Decision Tree Analysis Output/*
+/Decision Tree Analysis Output/
 
-/Preliminary Analysi Output/*
+/Preliminary Analysis Output/
