@@ -6,6 +6,8 @@ import hist_subplot #adjacent .py file, histogram subplot's took up many lines s
 import file_names #adjacent .py file containing variables holding string val's for different filenames
 import seaborn as sns #using seaborn to create nicer visuals
 
+#Please note: This analysis contains some print statements to indicate progress as it is somewhat slower than the modelling.
+
 # write_Eda_Summary function writes a summary of the exploratory data analysis steps performed
 def write_Eda_Summary(iris_df):
     print("Exploratory Data Analysis Summary Being Written...")
@@ -32,12 +34,8 @@ def write_Eda_Summary(iris_df):
 
         summaryFile.write("\nPlease find all generated .png's of plots in this same folder")
         summaryFile.write("\n\nSome Observations:")
-        summaryFile.write("\nFrom the 'Correlation Heatmap.png' we can see the correlation of our different parameters, \
-        which shows that there is likely a strong relationship between petal_length and petal_width, also for sepal_length \
-        and petal_length (though not as strongly correlated) and finally for petal_width and sepal_width, this also tells \
-        us that the remaining parameters do not have an impact on one another")
-        summaryFile.write("\nThis is further supported when looking at the 'Petal Width v Length.png', \
-        'Petal v Sepal Length.png' and 'Petal v Sepal Width.png', which all show a strong linear relationship but also hint at there being groupings or clusters of data, most likely based on species")
+        summaryFile.write("\nFrom the 'Correlation Heatmap.png' we can see the correlation of our different parameters, which shows that there is likely a strong relationship between petal_length and petal_width, also for sepal_length and petal_length (though not as strongly correlated) and finally for petal_width and sepal_width, this also tells us that the remaining parameters do not have an impact on one another")
+        summaryFile.write("\nThis is further supported when looking at the 'Petal Width v Length.png', 'Petal v Sepal Length.png' and 'Petal v Sepal Width.png', which all show a strong linear relationship but also hint at there being groupings or clusters of data, most likely based on species")
 
 # pyplot_Plots function generates a series of plots using the pyplot library
 def pyplot_Plots(iris_df):
@@ -174,3 +172,5 @@ myMultiHistFig = hist_subplot.hist_subplot_iris(iris_df)
 myMultiHistFig.savefig(file_names.histPngName) #save hist subplot to .png
 #call function to generate seaborn plots, basically same as pyplot plots but prettier
 seaborn_Plots(iris_df,iris_setosa_df,iris_versicolor_df,iris_virginica_df)
+
+print("\n\nPlease find summary.txt and generated plots in folder: '\\Preliminary Analysis Output\\'")

@@ -42,6 +42,7 @@ def hist_subplot_iris(iris_df):
     axes[1][0].set_ylabel('No. Petals')
     axes[1][0].set_xlabel('Petal Length')
 
+    #ommitting comments here due to rinse and repeat, with slight changes
     axes[1][1].hist(iris_setosa_df['petal_width'], color='red')
     axes[1][1].set_title('Iris-Setosa petal width')
     axes[1][1].legend(['Iris Setosa'])

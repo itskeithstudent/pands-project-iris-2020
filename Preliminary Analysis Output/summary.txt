@@ -50,5 +50,5 @@ petal_width       0.817954    -0.356544      0.962757     1.000000
 Please find all generated .png's of plots in this same folder
 
 Some Observations:
-From the 'Correlation Heatmap.png' we can see the correlation of our different parameters,         which shows that there is likely a strong relationship between petal_length and petal_width, also for sepal_length         and petal_length (though not as strongly correlated) and finally for petal_width and sepal_width, this also tells         us that the remaining parameters do not have an impact on one another
-This is further supported when looking at the 'Petal Width v Length.png',         'Petal v Sepal Length.png' and 'Petal v Sepal Width.png', which all show a strong linear relationship but also hint at there being groupings or clusters of data, most likely based on species
+From the 'Correlation Heatmap.png' we can see the correlation of our different parameters, which shows that there is likely a strong relationship between petal_length and petal_width, also for sepal_length and petal_length (though not as strongly correlated) and finally for petal_width and sepal_width, this also tells us that the remaining parameters do not have an impact on one another
+This is further supported when looking at the 'Petal Width v Length.png', 'Petal v Sepal Length.png' and 'Petal v Sepal Width.png', which all show a strong linear relationship but also hint at there being groupings or clusters of data, most likely based on species

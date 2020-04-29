@@ -40,7 +40,10 @@ vignettes/*.pdf
 
 # Images
 *.png
-*.txt
 
 # virtual env
 /env
+
+/Decision Tree Analysis Output/*
+
+/Preliminary Analysi Output/*
